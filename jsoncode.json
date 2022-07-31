@@ -1,0 +1,176 @@
+[
+    {
+        "id": "37e5df46ca619b35",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "85fe6a71581d8bb9",
+        "type": "serial in",
+        "z": "37e5df46ca619b35",
+        "name": "",
+        "serial": "440c920d9886b9eb",
+        "x": 170,
+        "y": 120,
+        "wires": [
+            [
+                "4825eab988208aa3"
+            ]
+        ]
+    },
+    {
+        "id": "750e1bdd8d38cb4b",
+        "type": "debug",
+        "z": "37e5df46ca619b35",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "data",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "4825eab988208aa3",
+        "type": "function",
+        "z": "37e5df46ca619b35",
+        "name": "Ibrahim",
+        "func": "msg.payload = msg.payload.trim();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 160,
+        "wires": [
+            [
+                "b5d1dc4b02e8ed04"
+            ]
+        ]
+    },
+    {
+        "id": "b5d1dc4b02e8ed04",
+        "type": "function",
+        "z": "37e5df46ca619b35",
+        "name": "odd Even",
+        "func": "if(msg.payload===\"odd\")\n{\nmsg.data={flag:msg.payload,number}\n}\nelse if(msg.payload===\"even\")\n{\nmsg.data={flag:msg.payload, number}\n}\nelse\n{\nnumber=Number(msg.payload)\n}\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 200,
+        "wires": [
+            [
+                "fddb53df1206ff10"
+            ]
+        ]
+    },
+    {
+        "id": "fddb53df1206ff10",
+        "type": "switch",
+        "z": "37e5df46ca619b35",
+        "name": "",
+        "property": "data",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 390,
+        "y": 240,
+        "wires": [
+            [
+                "fbb29985596d2b24",
+                "6106164824133c5d",
+                "750e1bdd8d38cb4b"
+            ]
+        ]
+    },
+    {
+        "id": "fbb29985596d2b24",
+        "type": "ui_text",
+        "z": "37e5df46ca619b35",
+        "group": "589e958e03302a1b",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Number",
+        "format": "{{msg.data.number}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 520,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "6106164824133c5d",
+        "type": "ui_text",
+        "z": "37e5df46ca619b35",
+        "group": "589e958e03302a1b",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Flag",
+        "format": "{{msg.data.flag}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 510,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "440c920d9886b9eb",
+        "type": "serial-port",
+        "serialport": "COM15",
+        "serialbaud": "115200",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "589e958e03302a1b",
+        "type": "ui_group",
+        "name": "[odd or even]",
+        "tab": "fcac1dfde0cbb4ed",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "fcac1dfde0cbb4ed",
+        "type": "ui_tab",
+        "name": "Even or Odd",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
